@@ -1,5 +1,7 @@
 const express = require("express");
 const router = express.Router();
+const {User, Show} = require("../models/index")
+const {db} = require("../db/connection");
 
 
 router.get("/", async (request,response) => {
@@ -27,4 +29,4 @@ router.put("/:userid/watched/:showid", async (request,response) => {
     response.json(shows)
 })
 
-module.exports = {router}
+module.exports = router;

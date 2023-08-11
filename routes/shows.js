@@ -1,5 +1,7 @@
 const express = require("express");
 const router = express.Router();
+const { Show } = require("../models/index")
+const {db} = require("../db/connection");
 
 // Homebrew middleware which we HOPED would validate the parameters and throw errors if they weren't correct
 const checker = async function(request,response,next){
@@ -12,7 +14,7 @@ const checker = async function(request,response,next){
     next()
 }
 
-router.use(checker)
+//router.use(checker)
 
 
 router.get("/", async (request,response) => {
@@ -66,4 +68,4 @@ router.delete("/:showid", async (request,response) => {
     response.json(deleted);
 })
 
-module.exports = {router};
+module.exports = router;
