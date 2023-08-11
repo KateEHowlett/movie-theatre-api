@@ -50,7 +50,7 @@ app.get("/shows/genres/:genre", async (request,response) => {
     response.json(show)
 })
 
-app.get("/shows/rating/:showid/:rating", async (request,response) => {
+app.put("/shows/:showid/rating/:rating", async (request,response) => {
     await Show.update({rating:request.params.rating},{
         where:{
             id:request.params.showid
@@ -58,6 +58,26 @@ app.get("/shows/rating/:showid/:rating", async (request,response) => {
     })
     const show = await Show.findByPk(request.params.showid);
     response.json(show)
+})
+
+app.put("/shows/:showid/status/:status", async (request,response) => {
+    await Show.update({status:request.params.status},{
+        where:{
+            id:request.params.showid
+        }
+    })
+    const show = await Show.findByPk(request.params.showid);
+    response.json(show)
+})
+
+app.delete("/shows/:showid", async (request,response) => {
+    const deleted = await Show.findByPk(request.params.showid)
+    await Show.destroy({
+        where:{
+            id:request.params.showid
+        }
+    })
+    response.json(deleted);
 })
 
 
